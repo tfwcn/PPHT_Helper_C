@@ -1,0 +1,52 @@
+// PPHT_Helper_C.idl : PPHT_Helper_C.dll 的类型库源
+// 此文件将由 MIDL 编译器处理以产生
+// 类型库(PPHT_Helper_C.tlb)。
+
+#include "olectl.h"
+[ uuid(74BDDAB6-04B3-40F7-8DED-AD92E54F1B46), version(1.0) ]
+library PPHT_Helper_C
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+	//  onvertHelper 的主调度接口
+		
+	[ uuid(BC39A831-E868-48B6-ACD3-4CB0341B531F) ]
+	dispinterface IonvertHelper
+	{
+		properties:
+		methods:
+			[id(1)] BSTR IntToHex(ULONG val,ULONG len);
+			[id(2)] ULONG HexToInt(BSTR val);
+	};
+
+	//  onvertHelper 的类信息
+
+	[ uuid(8B462A43-4FC8-493C-9E11-41CE8B2A81AB) ]
+	coclass onvertHelper
+	{
+		[default] dispinterface IonvertHelper;
+	};
+	//  olorHelper 的主调度接口
+		
+	[ uuid(125E83E6-E1D4-4021-92E5-99EC2975EF4D) ]
+	dispinterface IolorHelper
+	{
+		properties:
+		methods:
+			[id(1)] ULONG GetPixelColor(ULONG hwnd, LONG x, LONG y);
+			[id(2)] LONG CheckColor(ULONG color1, ULONG color2, ULONG offset);
+			[id(3)] LONG CheckColorOfPosition(ULONG hwnd, LONG x, LONG y, ULONG color, ULONG offset);
+			[id(4)] BSTR FindPic(ULONG hwnd, BSTR path, LONG x, ULONG y, ULONG width, LONG height, ULONG offset);
+			[id(5)] BSTR GetColorStr(ULONG color);
+			[id(6)] BSTR GetColorPositions(ULONG hwnd, LONG x, LONG y, ULONG width, ULONG height, BSTR direction, ULONG beginSize, ULONG endSize, ULONG color, ULONG offset, ULONG iscut);
+			[id(7)] LONG CheckIn(BSTR points1, BSTR points2);
+	};
+
+	//  olorHelper 的类信息
+
+	[ uuid(4F3E8376-2863-461C-8A02-319A198ABBB8) ]
+	coclass olorHelper
+	{
+		[default] dispinterface IolorHelper;
+	};
+};
