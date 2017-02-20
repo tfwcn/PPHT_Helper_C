@@ -11,25 +11,33 @@ library PPHT_Helper_C
 	//  onvertHelper 的主调度接口
 		
 	[ uuid(BC39A831-E868-48B6-ACD3-4CB0341B531F) ]
-	dispinterface IonvertHelper
+	dispinterface IConvertHelper
 	{
 		properties:
 		methods:
 			[id(1)] BSTR IntToHex(ULONG val,ULONG len);
 			[id(2)] ULONG HexToInt(BSTR val);
+			[id(3)] ULONG StringToUnicodeBytes(BSTR val,BYTE** bytes);
+			[id(4)] ULONG StringToANSIBytes(BSTR val,BYTE** bytes);
+			[id(5)] ULONG StringToUTF8Bytes(BSTR val,BYTE** bytes);
+			[id(6)] BSTR BytesToUnicodeString(BYTE* val);
+			[id(7)] BSTR BytesToANSIString(BYTE* val);
+			[id(8)] BSTR BytesToUTF8String(BYTE* val);
+			[id(9)] LONG BytesToInt(BYTE* val);
+			[id(10)] DOUBLE BytesToDouble(BYTE* val);
 	};
 
-	//  onvertHelper 的类信息
+	// ConvertHelper 的类信息
 
 	[ uuid(8B462A43-4FC8-493C-9E11-41CE8B2A81AB) ]
-	coclass onvertHelper
+	coclass ConvertHelper
 	{
-		[default] dispinterface IonvertHelper;
+		[default] dispinterface IConvertHelper;
 	};
 	//  olorHelper 的主调度接口
 		
 	[ uuid(125E83E6-E1D4-4021-92E5-99EC2975EF4D) ]
-	dispinterface IolorHelper
+	dispinterface IColorHelper
 	{
 		properties:
 		methods:
@@ -39,14 +47,206 @@ library PPHT_Helper_C
 			[id(4)] BSTR FindPic(ULONG hwnd, BSTR path, LONG x, ULONG y, ULONG width, LONG height, ULONG offset);
 			[id(5)] BSTR GetColorStr(ULONG color);
 			[id(6)] BSTR GetColorPositions(ULONG hwnd, LONG x, LONG y, ULONG width, ULONG height, BSTR direction, ULONG beginSize, ULONG endSize, ULONG color, ULONG offset, ULONG iscut);
-			[id(7)] LONG CheckIn(BSTR points1, BSTR points2);
+			[id(7)] DOUBLE CheckIn(BSTR points1, BSTR points2);
+			[id(8)] ULONG CreateCompatibleBitmap(ULONG hdc, LONG width, LONG height);
 	};
 
-	//  olorHelper 的类信息
+	// ColorHelper 的类信息
 
 	[ uuid(4F3E8376-2863-461C-8A02-319A198ABBB8) ]
-	coclass olorHelper
+	coclass ColorHelper
 	{
-		[default] dispinterface IolorHelper;
+		[default] dispinterface IColorHelper;
+	};
+	//  ontrolHelper 的主调度接口
+		
+	[ uuid(9C3DC0C5-927B-400E-81EC-2A7BFAB02B62) ]
+	dispinterface IControlHelper
+	{
+		properties:
+		methods:
+			[id(1)] void MouseMove(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(2)] void LMouseDown(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(3)] void LMouseUp(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(4)] void LMouseClick(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(5)] void MMouseDown(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(6)] void MMouseUp(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(7)] void MMouseClick(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(8)] void RMouseDown(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(9)] void RMouseUp(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(10)] void RMouseClick(ULONG hwnd, LONG x, LONG y, VARIANT_BOOL absolute);
+			[id(11)] void SendUnicodeString(ULONG hwnd, BSTR msgStr);
+			[id(12)] void SendANSIString(ULONG hwnd, BSTR msgStr);
+			[id(13)] void SendUTF8String(ULONG hwnd, BSTR msgStr);
+			[id(14)] void KeyDown(ULONG hwnd, ULONG key);
+			[id(15)] void KeyUp(ULONG hwnd, ULONG key);
+			[id(16)] void KeyPress(ULONG hwnd, ULONG key);
+	};
+
+	// ControlHelper 的类信息
+
+	[ uuid(D815E262-ABFA-4437-BFBB-EFB316F4A31E) ]
+	coclass ControlHelper
+	{
+		[default] dispinterface IControlHelper;
+	};
+	//  MemoryHelper 的主调度接口
+		
+	[ uuid(DBA955B9-0175-4087-A36B-D47D43FD7DA9) ]
+	dispinterface IMemoryHelper
+	{
+		properties:
+		methods:
+			[id(1)] ULONG GetPidByHwnd(ULONG hwnd);
+			[id(2)] ULONG GetPidByProcessName(BSTR processName);
+			[id(3)] LONG ReadInt(ULONG pid, ULONG address, ULONG len);
+			[id(4)] DOUBLE ReadDouble(ULONG pid, ULONG address, ULONG len);
+			[id(5)] BSTR ReadUnicodeString(ULONG pid, ULONG address, ULONG maxLen);
+			[id(6)] BSTR ReadANSIString(ULONG pid, ULONG address, ULONG maxLen);
+			[id(7)] BSTR ReadUTF8String(ULONG pid, ULONG address, ULONG maxLen);
+			[id(8)] ULONG GetAddressOfString(ULONG pid, BSTR address);
+			[id(9)] void WriteInt(ULONG pid, ULONG address, LONG val);
+			[id(10)] void WriteDouble(ULONG pid, ULONG address, DOUBLE val);
+			[id(11)] void WriteFloat(ULONG pid, ULONG address, FLOAT val);
+			[id(12)] void WriteShort(ULONG pid, ULONG address, SHORT val);
+			[id(13)] void WriteByte(ULONG pid, ULONG address, BYTE val);
+			[id(14)] void WriteUnicodeString(ULONG pid, ULONG address, BSTR val);
+			[id(15)] void WriteANSIString(ULONG pid, ULONG address, BSTR val);
+			[id(16)] void WriteUTF8String(ULONG pid, ULONG address, BSTR val);
+			[id(17)] ULONG GetHwndByPid(ULONG pid);
+			[id(18)] BSTR GetHwndsByWindowName(BSTR windowName, ULONG cmpType);
+			[id(19)] ULONG FindSubWindow(ULONG hwnd1, ULONG hwnd2, BSTR className1, BSTR className2);
+	};
+
+	//  MemoryHelper 的类信息
+
+	[ uuid(45CB3674-3B8B-4F59-8EF1-DA1566AB5B3B) ]
+	coclass MemoryHelper
+	{
+		[default] dispinterface IMemoryHelper;
+	};
+	//  FileHelper 的主调度接口
+		
+	[ uuid(F6C73760-EAA2-4525-A85B-7C56E370F859) ]
+	dispinterface IFileHelper
+	{
+		properties:
+		methods:
+			[id(1)] ULONG OpenFile(BSTR path, ULONG type);
+			[id(2)] void CloseFile(ULONG id);
+			[id(3)] BSTR ReadAllString(ULONG id);
+			[id(4)] BSTR ReadLineString(ULONG id);
+			[id(5)] void SetSeek(ULONG id, ULONG offset, ULONG type);
+			[id(6)] ULONG GetSeek(ULONG id);
+			[id(7)] ULONG GetFileSize(ULONG id);
+			[id(8)] void WriteString(ULONG id, BSTR val);
+			[id(9)] void WriteLineString(ULONG id, BSTR val);
+			[id(10)] void ClearFile(ULONG id);
+	};
+
+	//  FileHelper 的类信息
+
+	[ uuid(0E270940-C4D7-4F5D-98A2-3FB00F0080F2) ]
+	coclass FileHelper
+	{
+		[default] dispinterface IFileHelper;
+	};
+	//  XmlHelper 的主调度接口
+		
+	[ uuid(C620CE0F-8578-4405-805E-A8AEFFE07F87) ]
+	dispinterface IXmlHelper
+	{
+		properties:
+		methods:
+			[id(1)] ULONG OpenXml(BSTR path, ULONG type);
+			[id(2)] void SaveXml(ULONG id, BSTR path);
+			[id(3)] void CloseXml(ULONG id);
+			[id(4)] ULONG FindNode(ULONG id, BSTR findStr);
+			[id(5)] ULONG FindChildNode(ULONG nodeId, BSTR findStr);
+			[id(6)] ULONG GetNextNode(ULONG nodeId);
+			[id(7)] BSTR GetText(ULONG nodeId);
+			[id(8)] BSTR GetAttribute(ULONG nodeId, BSTR attributeName);
+			[id(9)] void SetText(ULONG nodeId, BSTR val);
+			[id(10)] void SetAttribute(ULONG nodeId, BSTR key, BSTR val);
+			[id(11)] void RemoveAttribute(ULONG nodeId, BSTR key);
+			[id(12)] ULONG AddChildNode(ULONG nodeId, BSTR name);
+			[id(13)] BSTR GetName(ULONG nodeId);
+			[id(14)] void RemoveNode(ULONG nodeId);
+			[id(15)] void SetName(ULONG nodeId, BSTR name);
+	};
+
+	//  XmlHelper 的类信息
+
+	[ uuid(347858BE-4736-4FA7-9B0C-E6F01FCDE9D6) ]
+	coclass XmlHelper
+	{
+		[default] dispinterface IXmlHelper;
+	};
+	//  StringHelper 的主调度接口
+		
+	[ uuid(59408ABD-8597-4678-80EE-B359EE192984) ]
+	dispinterface IStringHelper
+	{
+		properties:
+		methods:
+			[id(1)] ULONG Length(BSTR val);
+			[id(2)] BSTR SubString(BSTR val, ULONG start, LONG len);
+			[id(3)] BSTR Left(BSTR val, ULONG len);
+			[id(4)] BSTR Right(BSTR val, ULONG len);
+			[id(5)] BSTR Trim(BSTR val);
+			[id(6)] BSTR LTrim(BSTR val);
+			[id(7)] BSTR RTrim(BSTR val);
+			[id(8)] BSTR Replace(BSTR val, BSTR oldVal, BSTR newVal);
+			[id(9)] LONG IndexOf(BSTR val, BSTR selectVal);
+			[id(10)] LONG LastIndexOf(BSTR val, BSTR selectVal);
+			[id(11)] BSTR ToLower(BSTR val);
+			[id(12)] BSTR ToUpper(BSTR val);
+			[id(13)] LONG RegexMatch(BSTR str, BSTR regex);
+			[id(14)] BSTR RegexReplace(BSTR str, BSTR newVal, BSTR regex);
+			[id(15)] LONG RegexIndexOf(BSTR str, BSTR regex);
+			[id(16)] LONG RegexLastIndexOf(BSTR str, BSTR regex);
+			[id(17)] BSTR RegexFindSubString(BSTR str, BSTR regex);
+	};
+
+	//  StringHelper 的类信息
+
+	[ uuid(A1F09381-8B0A-4587-B8FF-2B490EA8E437) ]
+	coclass StringHelper
+	{
+		[default] dispinterface IStringHelper;
+	};
+	//  WindowHelper 的主调度接口
+		
+	[ uuid(0F49A766-672F-4D97-BE2A-487D32C569EE) ]
+	dispinterface IWindowHelper
+	{
+		properties:
+		methods:
+			[id(1)] LONG FlashWindow(ULONG hwnd);
+			[id(2)] BSTR GetWindowTitle(ULONG hwnd);
+			[id(3)] ULONG GetForegroundWindow(void);
+			[id(4)] LONG IsMin(ULONG hwnd);
+			[id(5)] LONG IsWindow(ULONG hwnd);
+			[id(6)] LONG IsMax(ULONG hwnd);
+			[id(7)] LONG SetForegroundWindow(ULONG hwnd);
+			[id(8)] void MinWindow(ULONG hwnd);
+			[id(9)] void RestoreWindow(ULONG hwnd);
+			[id(10)] void MaxWindow(ULONG hwnd);
+			[id(11)] BSTR GetWindowSize(ULONG hwnd);
+			[id(12)] BSTR GetClientSize(ULONG hwnd);
+			[id(13)] void MoveWindow(ULONG hwnd, LONG x, LONG y);
+			[id(14)] void SetWindowSize(ULONG hwnd, ULONG width, ULONG height);
+			[id(15)] void SetClientSize(ULONG hwnd, ULONG width, ULONG height);
+			[id(16)] ULONG WindowFromPoint(LONG x, LONG y);
+			[id(17)] ULONG GetDC(ULONG hwnd);
+			[id(18)] void GetClientRect(ULONG hwnd, LONG* left, LONG* right, LONG* top, LONG* bottom);
+	};
+
+	//  WindowHelper 的类信息
+
+	[ uuid(2539E6F3-C471-4340-8AE1-914269F7BE66) ]
+	coclass WindowHelper
+	{
+		[default] dispinterface IWindowHelper;
 	};
 };

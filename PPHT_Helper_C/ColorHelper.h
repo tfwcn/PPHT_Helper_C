@@ -22,6 +22,7 @@ protected:
 
 	enum 
 	{
+		dispidCreateCompatibleBitmap = 8L,
 		dispidCheckIn = 7L,
 		dispidGetColorPositions = 6L,
 		dispidGetColorStr = 5L,
@@ -30,6 +31,8 @@ protected:
 		dispidCheckColor = 2L,
 		dispidGetPixelColor = 1L
 	};
+private:
+	ConvertHelper convertHelper;
 
 public:
 	ULONG GetPixelColor(ULONG hwnd, LONG x, LONG y);
@@ -38,11 +41,9 @@ public:
 	BSTR FindPic(ULONG hwnd, LPCTSTR path, LONG x, LONG y, ULONG width, ULONG height, ULONG offset);
 	BSTR GetColorStr(ULONG color);
 	BSTR GetColorPositions(ULONG hwnd, LONG x, LONG y, ULONG width, ULONG height, LPCTSTR direction, ULONG beginSize, ULONG endSize, ULONG color, ULONG offset, ULONG iscut);
-
-private:
-	ConvertHelper convertHelper;
+	DOUBLE CheckIn(LPCTSTR points1, LPCTSTR points2);
 protected:
-	LONG CheckIn(LPCTSTR points1, LPCTSTR points2);
+	ULONG CreateCompatibleBitmap(ULONG hdc, LONG width, LONG height);
 };
 
 

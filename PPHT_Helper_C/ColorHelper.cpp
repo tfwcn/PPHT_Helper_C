@@ -52,19 +52,20 @@ BEGIN_DISPATCH_MAP(ColorHelper, CWnd)
 	DISP_FUNCTION_ID(ColorHelper, "FindPic", dispidFindPic, FindPic, VT_BSTR, VTS_UI4 VTS_BSTR VTS_I4 VTS_I4 VTS_UI4 VTS_UI4 VTS_UI4)
 	DISP_FUNCTION_ID(ColorHelper, "GetColorStr", dispidGetColorStr, GetColorStr, VT_BSTR, VTS_UI4)
 	DISP_FUNCTION_ID(ColorHelper, "GetColorPositions", dispidGetColorPositions, GetColorPositions, VT_BSTR, VTS_UI4 VTS_I4 VTS_I4 VTS_UI4 VTS_UI4 VTS_BSTR VTS_UI4 VTS_UI4 VTS_UI4 VTS_UI4 VTS_UI4)
-	DISP_FUNCTION_ID(ColorHelper, "CheckIn", dispidCheckIn, CheckIn, VT_I4, VTS_BSTR VTS_BSTR)
+	DISP_FUNCTION_ID(ColorHelper, "CheckIn", dispidCheckIn, CheckIn, VT_R8, VTS_BSTR VTS_BSTR)
+	DISP_FUNCTION_ID(ColorHelper, "CreateCompatibleBitmap", dispidCreateCompatibleBitmap, CreateCompatibleBitmap, VT_UI4, VTS_UI4 VTS_I4 VTS_I4)
 END_DISPATCH_MAP()
 
-// 注意: 我们添加 IID_IolorHelper 支持
+// 注意: 我们添加 IID_IColorHelper 支持
 //  以支持来自 VBA 的类型安全绑定。此 IID 必须同附加到 .IDL 文件中的
 //  调度接口的 GUID 匹配。
 
 // {125E83E6-E1D4-4021-92E5-99EC2975EF4D}
-static const IID IID_IolorHelper =
+static const IID IID_IColorHelper =
 { 0x125E83E6, 0xE1D4, 0x4021, { 0x92, 0xE5, 0x99, 0xEC, 0x29, 0x75, 0xEF, 0x4D } };
 
 BEGIN_INTERFACE_MAP(ColorHelper, CWnd)
-	INTERFACE_PART(ColorHelper, IID_IolorHelper, Dispatch)
+	INTERFACE_PART(ColorHelper, IID_IColorHelper, Dispatch)
 END_INTERFACE_MAP()
 
 // {4F3E8376-2863-461C-8A02-319A198ABBB8}
@@ -182,9 +183,9 @@ BSTR ColorHelper::FindPic(ULONG hwnd, LPCTSTR path, LONG x, LONG y, ULONG width,
 		picCbit->DeleteObject();
 		picCdc.DeleteDC();
 
-		for (int i=0;i<picH;i++)
+		for (ULONG i=0;i<picH;i++)
 		{
-			for (int j=0;j<picW;j++)
+			for (ULONG j=0;j<picW;j++)
 			{
 				if (!(picBits[(j+i*picW)*4]==0xFF && picBits[(j+i*picW)*4+1]==0x0 && picBits[(j+i*picW)*4+2]==0xFF))
 				{
@@ -195,13 +196,13 @@ BSTR ColorHelper::FindPic(ULONG hwnd, LPCTSTR path, LONG x, LONG y, ULONG width,
 			}
 		}
 findPic:;
-		for (int i=0;i<height-picH+1;i++)
+		for (ULONG i=0;i<height-picH+1;i++)
 		{
-			for (int j=0;j<width-picW+1;j++)
+			for (ULONG j=0;j<width-picW+1;j++)
 			{
-				for (int k=startY;k<picH;k++)
+				for (ULONG k=startY;k<picH;k++)
 				{
-					for (int l=startX;l<picW;l++)
+					for (ULONG l=startX;l<picW;l++)
 					{
 						if (!(picBits[(l+k*picW)*4]==0xFF && picBits[(l+k*picW)*4+1]==0x0 && picBits[(l+k*picW)*4+2]==0xFF) &&
 							(abs(picBits[(l+k*picW)*4]-subBits[((j+l)+(i+k)*width)*4])>offset ||
@@ -339,11 +340,63 @@ BSTR ColorHelper::GetColorPositions(ULONG hwnd, LONG x, LONG y, ULONG width, ULO
 }
 
 
-LONG ColorHelper::CheckIn(LPCTSTR points1, LPCTSTR points2)
+DOUBLE ColorHelper::CheckIn(LPCTSTR points1, LPCTSTR points2)
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState());
+	DOUBLE ret=0,maxPerCent=0;
+	CString p1=points1;
+	CString p2=points2;
+	int a1,a2,b1,b2;
+	b1=p1.Find(L"|",0);
+	a1=p1.Replace(L"|",L"")+1;
+	b2=p2.Find(L"|",0);
+	a2=p2.Replace(L"|",L"")+1;
+	if (p1.GetLength()==a1*b1 && p2.GetLength()==a2*b2)
+	{
+		for (int i=0;i<a1-a2+1;i++)
+		{
+			for (int j=0;j<b1-b2+1;j++)
+			{
+				for (int k=0;k<a2;k++)
+				{
+					for (int l=0;l<b2;l++)
+					{
+						if (p1[(j+l)+(i+k)*b1]==p2[l+k*b2])
+						{
+							ret+=1;
+						}
+						else if (p1[(j+l)+(i+k)*b1]==_T('0'))
+						{
+							ret=0;
+							goto noPic;
+						}
+						if (k==a2-1&&l==b2-1&&ret==p2.GetLength())
+						{
+							maxPerCent=ret;
+							goto hPic;
+						}
+						else if (k==a2-1&&l==b2-1)
+						{
+							if (maxPerCent<ret)
+							{
+								maxPerCent=ret;
+							}
+						}
+					}
+				}
+noPic:;
+			}
+		}
+hPic:;
+	}
+	ret=maxPerCent/p2.GetLength();
+	return ret;
+}
+
+
+ULONG ColorHelper::CreateCompatibleBitmap(ULONG hdc, LONG width, LONG height)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 
-	// TODO: 在此添加调度处理程序代码
-
-	return 0;
+	return (ULONG)::CreateCompatibleBitmap((HDC)hdc,width,height);
 }

@@ -1,0 +1,131 @@
+﻿生成启动时间为 2014/2/10 22:09:48。
+     1>项目“F:\yunfiles\XFiles\WebFiles\PPHT_Helper_C\PPHT_Helper_C\PPHT_Helper_C.vcxproj”在节点 2 上(rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Release\PPHT_Helper_C.lastbuildstate”。
+       InitializeBuildStatus:
+         正在创建“Release\PPHT_Helper_C.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       Midl:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\midl.exe /D NDEBUG /W1 /nologo /char signed /env win32 /h "PPHT_Helper_C_h.h" /tlb "Release\PPHT_Helper_C.tlb" PPHT_Helper_C.idl 
+         Processing .\PPHT_Helper_C.idl
+         PPHT_Helper_C.idl
+         Processing C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\oaidl.idl
+         oaidl.idl
+         Processing C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\objidl.idl
+         objidl.idl
+         Processing C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\unknwn.idl
+         unknwn.idl
+         Processing C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\wtypes.idl
+         wtypes.idl
+         Processing C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\basetsd.h
+         basetsd.h
+         Processing C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\guiddef.h
+         guiddef.h
+         Processing C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\oaidl.acf
+         oaidl.acf
+       ClCompile:
+         E:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _USRDLL /D _WINDLL /D _UNICODE /D UNICODE /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\PPHT_Helper_C.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         E:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _USRDLL /D _WINDLL /D _UNICODE /D UNICODE /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\PPHT_Helper_C.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ColorHelper.cpp ControlHelper.cpp ConvertHelper.cpp FileHelper.cpp MemoryHelper.cpp PPHT_Helper_C.cpp StringHelper.cpp tinystr.cpp tinyxml.cpp tinyxmlerror.cpp tinyxmlparser.cpp WindowHelper.cpp XmlHelper.cpp
+         ColorHelper.cpp
+     1>ColorHelper.cpp(94): warning C4244: “=”: 从“ULONG”转换到“byte”，可能丢失数据
+     1>ColorHelper.cpp(97): warning C4244: “=”: 从“ULONG”转换到“byte”，可能丢失数据
+     1>ColorHelper.cpp(104): warning C4018: “>”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(104): warning C4018: “>”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(104): warning C4018: “>”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(155): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>ColorHelper.cpp(208): warning C4018: “>”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(209): warning C4018: “>”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(210): warning C4018: “>”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(265): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+     1>ColorHelper.cpp(272): warning C4244: “=”: 从“ULONG”转换到“byte”，可能丢失数据
+     1>ColorHelper.cpp(295): warning C4018: “<=”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(295): warning C4018: “<=”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(295): warning C4018: “<=”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(301): warning C4018: “<=”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(301): warning C4018: “<=”: 有符号/无符号不匹配
+     1>ColorHelper.cpp(301): warning C4018: “<=”: 有符号/无符号不匹配
+         ControlHelper.cpp
+     1>ControlHelper.cpp(95): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(96): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(124): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(125): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(154): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(155): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(184): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(185): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(227): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(228): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(257): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(258): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(287): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(288): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(330): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(331): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(360): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(361): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(390): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(391): warning C4244: “初始化”: 从“float”转换到“LONG”，可能丢失数据
+     1>ControlHelper.cpp(474): warning C4244: “参数”: 从“ULONG”转换到“BYTE”，可能丢失数据
+     1>ControlHelper.cpp(495): warning C4244: “参数”: 从“ULONG”转换到“BYTE”，可能丢失数据
+     1>ControlHelper.cpp(518): warning C4244: “参数”: 从“ULONG”转换到“BYTE”，可能丢失数据
+     1>ControlHelper.cpp(520): warning C4244: “参数”: 从“ULONG”转换到“BYTE”，可能丢失数据
+         ConvertHelper.cpp
+     1>ConvertHelper.cpp(112): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Microsoft Visual Studio 10.0\VC\include\string.h(283) : 参见“wcscpy”的声明
+         FileHelper.cpp
+     1>FileHelper.cpp(138): warning C4244: “=”: 从“std::streamoff”转换到“ULONG”，可能丢失数据
+     1>FileHelper.cpp(209): warning C4244: “=”: 从“std::streamoff”转换到“ULONG”，可能丢失数据
+     1>FileHelper.cpp(211): warning C4244: “=”: 从“std::streamoff”转换到“ULONG”，可能丢失数据
+     1>FileHelper.cpp(233): warning C4244: “=”: 从“std::streamoff”转换到“ULONG”，可能丢失数据
+     1>FileHelper.cpp(242): warning C4244: “=”: 从“std::streamoff”转换到“ULONG”，可能丢失数据
+     1>FileHelper.cpp(264): warning C4244: “=”: 从“std::streamoff”转换到“ULONG”，可能丢失数据
+     1>FileHelper.cpp(208): warning C4101: “val”: 未引用的局部变量
+     1>FileHelper.cpp(304): warning C4244: “return”: 从“std::streamoff”转换到“ULONG”，可能丢失数据
+     1>FileHelper.cpp(320): warning C4244: “=”: 从“std::streamoff”转换到“ULONG”，可能丢失数据
+     1>FileHelper.cpp(318): warning C4101: “val”: 未引用的局部变量
+         MemoryHelper.cpp
+     1>MemoryHelper.cpp(115): warning C4996: 'wcsicmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _wcsicmp. See online help for details.
+                 E:\Microsoft Visual Studio 10.0\VC\include\string.h(390) : 参见“wcsicmp”的声明
+     1>MemoryHelper.cpp(149): warning C4244: “初始化”: 从“DOUBLE”转换到“LONG”，可能丢失数据
+         PPHT_Helper_C.cpp
+         StringHelper.cpp
+     1>StringHelper.cpp(210): warning C4018: “<”: 有符号/无符号不匹配
+         tinystr.cpp
+         tinyxml.cpp
+         tinyxmlerror.cpp
+         tinyxmlparser.cpp
+         WindowHelper.cpp
+         XmlHelper.cpp
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D NDEBUG /D _UNICODE /D UNICODE /D _AFXDLL /l"0x0804" /IRelease\ /nologo /fo"Release\PPHT_Helper_C.res" PPHT_Helper_C.rc 
+       Link:
+         E:\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\快盘\XDo\Release\PPHT_Helper_C.dll" /INCREMENTAL:NO /NOLOGO /DEF:".\PPHT_Helper_C.def" /MANIFEST /ManifestFile:"Release\PPHT_Helper_C.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"F:\快盘\XDo\Release\PPHT_Helper_C.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\快盘\XDo\Release\PPHT_Helper_C.lib" /MACHINE:X86 /DLL Release\PPHT_Helper_C.res
+         Release\ColorHelper.obj
+         Release\ControlHelper.obj
+         Release\ConvertHelper.obj
+         Release\FileHelper.obj
+         Release\MemoryHelper.obj
+         Release\PPHT_Helper_C.obj
+         Release\stdafx.obj
+         Release\StringHelper.obj
+         Release\tinystr.obj
+         Release\tinyxml.obj
+         Release\tinyxmlerror.obj
+         Release\tinyxmlparser.obj
+         Release\WindowHelper.obj
+         Release\XmlHelper.obj
+            正在创建库 F:\快盘\XDo\Release\PPHT_Helper_C.lib 和对象 F:\快盘\XDo\Release\PPHT_Helper_C.exp
+         正在生成代码
+     1>f:\yunfiles\xfiles\webfiles\ppht_helper_c\ppht_helper_c\windowhelper.cpp(100): warning C4700: 使用了未初始化的局部变量“tmpstr”
+         已完成代码的生成
+         PPHT_Helper_C.vcxproj -> F:\快盘\XDo\Release\PPHT_Helper_C.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"F:\快盘\XDo\Release\PPHT_Helper_C.dll;#2" /manifest Release\PPHT_Helper_C.dll.intermediate.manifest "E:\Microsoft Visual Studio 10.0\VC\Include\Manifest\dpiaware.manifest"
+       FinalizeBuildStatus:
+         正在删除文件“Release\PPHT_Helper_C.unsuccessfulbuild”。
+         正在对“Release\PPHT_Helper_C.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“F:\yunfiles\XFiles\WebFiles\PPHT_Helper_C\PPHT_Helper_C\PPHT_Helper_C.vcxproj”(rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:18.18

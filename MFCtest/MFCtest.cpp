@@ -3,115 +3,88 @@
 
 #include "stdafx.h"
 #include "MFCtest.h"
-#include <atlimage.h>
+#include "FileHelper.h"
+#include "tinyxml.h"
+#include "ConvertHelper.h"
+#include <boost\regex.hpp>
+#include <iostream>
+#include "MemoryHelper.h"
+#include "ControlHelper.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
 
 // 唯一的应用程序对象
 
 CWinApp theApp;
 
 using namespace std;
+using namespace boost;
 
 int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
 {
-	ULONG hwnd, x, y, width, height, beginSize, endSize, color, offset, iscut;
-	LPCTSTR direction;
-	hwnd=199216;
-	x=148, y=68, width=200, height=12, direction=L"y", beginSize=10, endSize=5, color=0xF7FFFF, offset=10,iscut=1;
-	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-
-	CString strResult;
-
-	HDC hdc=::GetDC((HWND)hwnd);
-	HDC subhdc=::CreateCompatibleDC(hdc);
-	HBITMAP hbit=::CreateCompatibleBitmap(hdc,width,height);
-	::SelectObject(subhdc,hbit);
-	::BitBlt(subhdc,0,0,width,height,hdc,x,y,SRCCOPY);
-	BYTE *bytes=new BYTE[width*height*4];
-	BITMAPINFO bitinfo;
-	bitinfo.bmiHeader.biBitCount=32;
-	bitinfo.bmiHeader.biCompression=BI_RGB;
-	bitinfo.bmiHeader.biPlanes=1;
-	bitinfo.bmiHeader.biSize=sizeof(bitinfo.bmiHeader);
-	bitinfo.bmiHeader.biWidth=width;
-	bitinfo.bmiHeader.biHeight=-height;
-	::GetDIBits(subhdc,hbit,0,height,bytes,&bitinfo,DIB_RGB_COLORS);
-	::DeleteObject(hbit);
-	::DeleteDC(subhdc);
-	::ReleaseDC((HWND)hwnd,hdc);
-
-	byte r1,g1,b1;
-	r1 = (color & 0xFF0000) >> 16;
-	g1 = (color & 0xFF00) >> 8;
-	b1 = color & 0xFF;
-	int amax, bmax, nc, nc2, isbegin;
-	nc = 0;
-	nc2 = 0;
-	isbegin = 0;
-	if (wcscmp(direction,L"y")==0)
-	{
-		amax = width;
-		bmax = height;
-	}
-	else
-	{
-		amax = height;
-		bmax = width;
-	}
-
-	for (int i=0;i<amax;i++)
-	{
-		nc = 0;
-		for (int j=0;j<bmax;j++)
-		{
-			_tprintf(_T("%d,%d,%d|"),bytes[(j+i*bmax)*4],bytes[(j+i*bmax)*4+1],bytes[(j+i*bmax)*4+2]);
-			if (abs(bytes[(j+i*bmax)*4]-r1)<=offset && abs(bytes[(j+i*bmax)*4+1]-g1)<=offset && abs(bytes[(j+i*bmax)*4+2]-b1)<=offset && wcscmp(direction,L"y")!=0)
-			{
-				isbegin = 1;
-				strResult += "1";
-				nc = 1;
-			}
-			else if (abs(bytes[(j*amax+i)*4]-r1)<=offset && abs(bytes[(j*amax+i)*4+1]-g1)<=offset && abs(bytes[(j*amax+i)*4+2]-b1)<=offset && wcscmp(direction,L"y")==0)
-			{
-				isbegin = 1;
-				strResult += "1";
-				nc = 1;
-			}
-			else
-			{
-				strResult += "0";
-			}
-		}
-		strResult += "|";
-		if (isbegin==0 && iscut>0)
-		{
-			strResult="";
-		}
-		if (nc==0)
-		{
-			nc2+=1;
-		} 
-		else
-		{
-			nc2=0;
-		}
-		if (isbegin==0 && i==beginSize && iscut>0)
-		{
-			break;
-		}
-		if (isbegin==1 && nc2==endSize && iscut>0)
-		{
-			strResult=strResult.Left(strResult.GetLength()-(bmax+1)*endSize);
-			break;
-		}
-	}
-	if (strResult.GetLength()>0)
-	{
-		strResult=strResult.Left(strResult.GetLength()-1);
-	}
+	//MemoryHelper *memoryHelper=new MemoryHelper();
+	/*ULONG pid = memoryHelper->GetPidByProcessName(L"DragonNest.exe");
+	ULONG hwnd = memoryHelper->GetHwndByPid(pid);*/
+	//ULONG hwnd = 0x6066C;
+	//ControlHelper *controlHelper=new ControlHelper();
+	//controlHelper->KeyPress(hwnd,67,2);
+	//FileHelper *fh=new FileHelper();
+	//int id=fh->OpenFile(L"G:\\log.txt",3);
+	//DWORD ImageBase = (DWORD)::GetModuleHandle(NULL);
+	//IMAGE_DOS_HEADER *pdosHeader = (IMAGE_DOS_HEADER*)ImageBase;
+	////首部地址偏移
+	//IMAGE_NT_HEADERS *pntHeaders = (IMAGE_NT_HEADERS*)((DWORD)ImageBase + pdosHeader->e_lfanew);
+	//if (pntHeaders->Signature==IMAGE_NT_SIGNATURE)
+	//{
+	//	//32位影像文件
+	//	if (pntHeaders->OptionalHeader.Magic==IMAGE_NT_OPTIONAL_HDR32_MAGIC)
+	//	{
+	//		//数组第一个为导出表，第二个为导入表
+	//		IMAGE_DATA_DIRECTORY *pSymbolTable = &pntHeaders->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT];
+	//		IMAGE_IMPORT_DESCRIPTOR *piid = (IMAGE_IMPORT_DESCRIPTOR*)((DWORD)ImageBase + pSymbolTable->VirtualAddress);
+	//		while(piid->FirstThunk)
+	//		{
+	//			char* dllName=(char*)((DWORD)ImageBase +piid->Name);
+	//			string s=dllName;
+	//			CString dllNameStr;
+	//			dllNameStr.Format(L"%s",s);
+	//			fh->WriteLineString(id,dllNameStr);
+	//			IMAGE_THUNK_DATA *pitd=(IMAGE_THUNK_DATA*)((DWORD)ImageBase + piid->FirstThunk);
+	//			IMAGE_THUNK_DATA *pitd2=(IMAGE_THUNK_DATA*)((DWORD)ImageBase + piid->OriginalFirstThunk);
+	//			while(pitd->u1.Function)
+	//			{
+	//				if ((*((DWORD*)pitd2)&0x80000000)==0)
+	//				{
+	//					IMAGE_IMPORT_BY_NAME *piibn=(IMAGE_IMPORT_BY_NAME*)((DWORD)ImageBase + pitd2->u1.AddressOfData);
+	//					char* funName=(char*)piibn->Name;
+	//					CString funNameStr;
+	//					funNameStr.Format(L"\t%d,%s",piibn->Hint,funName);
+	//					fh->WriteLineString(id,funNameStr);
+	//					funNameStr.Format(L"\t%d,%d",pitd->u1.Function,pitd2->u1.Function);
+	//					fh->WriteLineString(id,funNameStr);
+	//				}
+	//				pitd++;
+	//				pitd2++;
+	//			}
+	//			piid++;
+	//		}
+	//	}
+	//}
+	//fh->CloseFile(id);
+	::Sleep(2000);
+	LONG x=60,y=80;
+	LONG fScreenWidth = ::GetSystemMetrics( SM_CXSCREEN )-1;
+	LONG fScreenHeight = ::GetSystemMetrics( SM_CYSCREEN )-1;
+	LONG fx = x*(65535.0f/fScreenWidth);
+	LONG fy = y*(65535.0f/fScreenHeight);
+	RECT *size=new RECT();
+	//::GetWindowRect((HWND)0x601E4,size);
+	::GetClientRect((HWND)0x601E4,size);
+	POINT *p=new POINT();
+	::ClientToScreen((HWND)0x601E4,p);
+	::MoveWindow((HWND)0x601E4,100,100,size->right-size->left,size->bottom-size->top,true);
 	return 0;
 }

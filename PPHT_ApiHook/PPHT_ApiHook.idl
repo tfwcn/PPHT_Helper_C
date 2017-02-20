@@ -1,0 +1,29 @@
+// PPHT_ApiHook.idl : PPHT_ApiHook.dll 的类型库源
+// 此文件将由 MIDL 编译器处理以产生
+// 类型库(PPHT_ApiHook.tlb)。
+
+#include "olectl.h"
+[ uuid(D8B8279D-70F4-45A2-8F7E-75CBD6FA58C3), version(1.0) ]
+library PPHT_ApiHook
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+	//  HookHepler 的主调度接口
+		
+	[ uuid(9DD297A7-31C2-43BE-83C6-5024790CB870) ]
+	dispinterface IHookHepler
+	{
+		properties:
+		methods:
+			[id(1)] LONG SetHook(LONG hwnd);
+			[id(2)] LONG RemoveHook(void);
+	};
+
+	//  HookHepler 的类信息
+
+	[ uuid(D609900D-F747-4FB4-974D-B9C49A6FD231) ]
+	coclass HookHepler
+	{
+		[default] dispinterface IHookHepler;
+	};
+};
